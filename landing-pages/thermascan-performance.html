@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ThermaScan Performance</title>
+  <meta name="description" content="Plataforma de análise térmica pré e pós-treino para academias e estúdios. Veja a resposta muscular do treino em imagens térmicas." />
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(255,255,255,.06);
+      --panel-2: rgba(255,255,255,.08);
+      --text: #eaf2ff;
+      --muted: #a9b8d3;
+      --brand: #62d0ff;
+      --brand-2: #9b7bff;
+      --accent: #35f2a0;
+      --warn: #ffbf69;
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 24px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(98,208,255,.18), transparent 55%),
+        radial-gradient(800px 500px at 90% 20%, rgba(155,123,255,.20), transparent 50%),
+        radial-gradient(600px 400px at 50% 100%, rgba(53,242,160,.10), transparent 45%),
+        linear-gradient(180deg, #05101d 0%, var(--bg) 100%);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(7,17,31,.60);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .topbar .inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 0;
+      gap: 16px;
+    }
+    .brand {
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+      font-weight: 800; letter-spacing: .2px;
+    }
+    .logo {
+      width: 40px; height: 40px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 8px 24px rgba(98,208,255,.30);
+      position: relative;
+    }
+    .logo:before {
+      content: ""; position: absolute; inset: 10px 12px 12px 10px;
+      border-radius: 10px; border: 2px solid rgba(255,255,255,.65);
+      clip-path: polygon(0 55%, 32% 55%, 45% 14%, 61% 100%, 74% 64%, 100% 64%, 100% 80%, 68% 80%, 55% 38%, 39% 100%, 23% 55%, 0 55%);
+    }
+    .nav { display:flex; gap: 16px; flex-wrap: wrap; justify-content:flex-end; }
+    .nav a { text-decoration:none; color: var(--muted); font-size: 14px; }
+    .nav a:hover { color: var(--text); }
+    .hero { padding: 72px 0 30px; }
+    .grid-hero {
+      display:grid; grid-template-columns: 1.25fr .85fr; gap: 28px; align-items: stretch;
+    }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 14px; border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px; color: var(--muted); font-size: 13px; background: rgba(255,255,255,.03);
+    }
+    h1 { font-size: clamp(40px, 6vw, 72px); line-height: .95; margin: 18px 0 16px; letter-spacing: -1.8px; }
+    .lead { font-size: clamp(18px, 2vw, 22px); color: #dbe7ff; max-width: 780px; }
+    .cta-row { display:flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      min-height: 52px; padding: 0 18px; border-radius: 16px; text-decoration:none;
+      border: 1px solid transparent; font-weight: 700; transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      cursor:pointer;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #06111f; box-shadow: 0 16px 32px rgba(98,208,255,.20); }
+    .btn.secondary { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: var(--text); }
+    .stats { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .stat {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+      border-radius: 18px; padding: 16px;
+    }
+    .stat strong { display:block; font-size: 20px; margin-bottom: 4px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .mock {
+      padding: 22px; position: relative; overflow:hidden;
+      display:flex; flex-direction:column; gap: 16px; min-height: 100%;
+    }
+    .mock:before {
+      content:""; position:absolute; inset:auto -20% -25% 20%; width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(53,242,160,.22), transparent 60%);
+      filter: blur(8px);
+    }
+    .mock-head { display:flex; justify-content: space-between; align-items:center; gap: 10px; position:relative; z-index:1; }
+    .chip { padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.08); color: var(--muted); font-size: 12px; border: 1px solid rgba(255,255,255,.10); }
+    .thermal {
+      border-radius: 20px; overflow:hidden; border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(circle at 30% 35%, rgba(255,94,87,.95), transparent 28%),
+        radial-gradient(circle at 70% 30%, rgba(255,189,46,.88), transparent 26%),
+        radial-gradient(circle at 50% 66%, rgba(98,208,255,.88), transparent 22%),
+        linear-gradient(135deg, #2b0f4a, #08111d 70%);
+      min-height: 280px;
+      position:relative;
+    }
+    .thermal:after {
+      content:""; position:absolute; inset: 18px; border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,.28);
+    }
+    .thermal-label {
+      position:absolute; left: 18px; bottom: 18px; padding: 8px 12px; border-radius: 12px;
+      background: rgba(7,17,31,.60); border: 1px solid rgba(255,255,255,.10); font-size: 12px; color: #dbe7ff;
+    }
+    section { padding: 26px 0; }
+    .section-title { font-size: 30px; margin: 0 0 10px; letter-spacing: -.7px; }
+    .section-sub { margin: 0 0 20px; color: var(--muted); max-width: 820px; }
+    .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { padding: 20px; border-radius: 22px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10); }
+    .card h3 { margin: 0 0 10px; font-size: 18px; }
+    .card p, .card li { color: var(--muted); }
+    .card ul { margin: 0; padding-left: 18px; }
+    .steps { display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .step { padding: 20px; border-radius: 22px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10); }
+    .step .num { display:inline-flex; width: 34px; height: 34px; align-items:center; justify-content:center; border-radius: 12px; background: rgba(98,208,255,.16); color: var(--brand); font-weight: 800; margin-bottom: 12px; }
+    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .list { margin: 0; padding-left: 18px; color: var(--muted); }
+    .highlight {
+      padding: 22px; border-radius: 24px;
+      background: linear-gradient(135deg, rgba(98,208,255,.14), rgba(155,123,255,.12));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .faq details {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px; padding: 16px 18px; margin-bottom: 12px;
+    }
+    .faq summary { cursor:pointer; font-weight: 700; }
+    .faq p { color: var(--muted); margin-bottom: 0; }
+    .footer {
+      padding: 30px 0 48px; color: var(--muted); font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,.08); margin-top: 18px;
+    }
+    .footer-grid { display:flex; justify-content:space-between; gap: 12px; flex-wrap: wrap; }
+    .muted { color: var(--muted); }
+    .tagline { color: #dbe7ff; }
+    @media (max-width: 980px) {
+      .grid-hero, .cards, .steps, .two-col { grid-template-columns: 1fr; }
+      .nav { display:none; }
+      .hero { padding-top: 44px; }
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap inner">
+      <a class="brand" href="#top">
+        <span class="logo" aria-hidden="true"></span>
+        <span>ThermaScan Performance</span>
+      </a>
+      <nav class="nav" aria-label="Navegação">
+        <a href="#problema">Problema</a>
+        <a href="#solucao">Solução</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#monetizacao">Monetização</a>
+        <a href="#aeria">Aeria</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="top">
+    <header class="hero wrap">
+      <div class="grid-hero">
+        <div>
+          <span class="eyebrow">Plataforma de análise térmica pré e pós-treino</span>
+          <h1>Veja a resposta muscular do treino em imagens térmicas.</h1>
+          <p class="lead">Transforme duas capturas — <strong>antes</strong> e <strong>depois</strong> do treino — em um relatório visual de performance, recuperação e atenção por região muscular. Ideal para academias, estúdios de musculação e fisioterapia esportiva.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#contato">Quero testar na minha academia</a>
+            <a class="btn secondary" href="#piloto">Quero um piloto com escambo</a>
+          </div>
+          <div class="stats" aria-label="Destaques">
+            <div class="stat"><strong>+ valor percebido</strong><span>Relatórios visuais que ajudam a mostrar evolução.</span></div>
+            <div class="stat"><strong>+ retenção</strong><span>Acompanhamento recorrente para alunos e treinadores.</span></div>
+            <div class="stat"><strong>+ diferenciação</strong><span>Um recurso premium para academias inovadoras.</span></div>
+          </div>
+        </div>
+
+        <div class="panel mock" aria-label="Preview do produto">
+          <div class="mock-head">
+            <div>
+              <div style="font-weight:800;font-size:18px">Painel de análise</div>
+              <div class="muted" style="font-size:13px">Aluno #028 • Pós-treino</div>
+            </div>
+            <span class="chip">Comparação ativa</span>
+          </div>
+          <div class="thermal">
+            <div class="thermal-label">Delta térmico por região • atenção em quadríceps e ombros</div>
+          </div>
+          <div class="two-col" style="gap:12px">
+            <div class="card" style="padding:14px">
+              <h3 style="margin-bottom:6px">Validação de pose</h3>
+              <p style="margin:0">Captura alinhada antes da comparação.</p>
+            </div>
+            <div class="card" style="padding:14px">
+              <h3 style="margin-bottom:6px">Resumo IA</h3>
+              <p style="margin:0">Observações automáticas para treinador.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="problema" class="wrap">
+      <h2 class="section-title">O problema</h2>
+      <p class="section-sub">Hoje, a avaliação de esforço e recuperação muscular costuma depender de percepção subjetiva, dor relatada e observação manual. Isso dificulta mostrar valor, padronizar o acompanhamento e identificar sinais de sobrecarga.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Subjetividade</h3>
+          <p>Treinadores e alunos nem sempre têm uma leitura padronizada do que aconteceu após o treino.</p>
+        </article>
+        <article class="card">
+          <h3>Baixa padronização</h3>
+          <p>Sem um protocolo, cada captura vira uma análise diferente e pouco comparável.</p>
+        </article>
+        <article class="card">
+          <h3>Valor pouco visível</h3>
+          <p>Fica difícil vender acompanhamento premium sem evidência visual clara de evolução.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="solucao" class="wrap">
+      <div class="highlight">
+        <h2 class="section-title" style="margin-top:0">A solução</h2>
+        <p class="section-sub" style="margin-bottom:0">O ThermaScan Performance compara imagens termais pré e pós-treino para destacar regiões com maior variação térmica e gerar um resumo orientado a performance. O produto deve ser posicionado como monitoramento de performance e recuperação, não como diagnóstico médico.</p>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="wrap">
+      <h2 class="section-title">Como funciona</h2>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h3>Captura guiada pré-treino</h3><p>O usuário posiciona o corpo e registra a imagem térmica em um protocolo simples.</p></div>
+        <div class="step"><div class="num">2</div><h3>Captura guiada pós-treino</h3><p>Após a sessão, uma nova imagem é feita para comparação com a prévia.</p></div>
+        <div class="step"><div class="num">3</div><h3>Validação de pose</h3><p>A captura é checada com visão computacional para reduzir erro de posição e movimento.</p></div>
+        <div class="step"><div class="num">4</div><h3>Segmentação por região muscular</h3><p>O sistema marca áreas de interesse para comparação consistente entre as duas imagens.</p></div>
+        <div class="step"><div class="num">5</div><h3>Comparação térmica</h3><p>O app destaca diferenças entre pré e pós por região muscular e gera indicadores visuais.</p></div>
+        <div class="step"><div class="num">6</div><h3>Relatório visual e resumo</h3><p>O treinador recebe um painel simples com alertas, observações e histórico do aluno.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap two-col">
+      <div class="card">
+        <h2 class="section-title">O que o cliente vê</h2>
+        <ul class="list">
+          <li>mapa térmico comparativo</li>
+          <li>áreas com maior atenção</li>
+          <li>histórico de evolução por aluno</li>
+          <li>leitura rápida para treino, recuperação e acompanhamento</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="section-title">Para quem é</h2>
+        <ul class="list">
+          <li>academias premium</li>
+          <li>estúdios de musculação</li>
+          <li>fisioterapia esportiva</li>
+          <li>centros de recovery</li>
+          <li>personal trainers com serviço premium</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="monetizacao" class="wrap">
+      <h2 class="section-title">Modelo de monetização</h2>
+      <div class="cards">
+        <article class="card"><h3>Assinatura mensal</h3><p>Plano recorrente por unidade ou por academia.</p></article>
+        <article class="card"><h3>Licença</h3><p>Licença por academia com suporte e implantação.</p></article>
+        <article class="card"><h3>Por uso</h3><p>Cobrança por aluno analisado ou por sessão.</p></article>
+      </div>
+      <div style="height:16px"></div>
+      <div class="cards">
+        <article class="card"><h3>Piloto pago</h3><p>Taxa de implantação e validação inicial com academia parceira.</p></article>
+        <article class="card"><h3>Serviço premium</h3><p>Suporte, treinamento e análise assistida como camada extra.</p></article>
+        <article class="card"><h3>Bundle Aeria</h3><p>Venda integrada com outros módulos da plataforma Aeria.</p></article>
+      </div>
+    </section>
+
+    <section id="piloto" class="wrap two-col">
+      <div class="card">
+        <h2 class="section-title">Piloto com escambo</h2>
+        <p>Para validar mais rápido, o melhor caminho é um piloto com troca de valor.</p>
+        <ul class="list">
+          <li>você entrega a beta ou a implementação inicial</li>
+          <li>a academia oferece acesso ao espaço e alunos reais</li>
+          <li>as mensalidades podem ser usadas como moeda de troca</li>
+          <li>o acordo define prazo, escopo, entregáveis e autorização de case</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="section-title">Diferenciais do produto</h2>
+        <ul class="list">
+          <li>validação de pose antes da análise</li>
+          <li>segmentação por região muscular</li>
+          <li>relatório simples para treinador e aluno</li>
+          <li>histórico de evolução por pessoa</li>
+          <li>integração com <code>aeria-apps.com.br</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="aeria" class="wrap">
+      <div class="highlight">
+        <h2 class="section-title" style="margin-top:0">Integração com aeria-apps.com.br</h2>
+        <p class="section-sub" style="margin-bottom:0">O ThermaScan pode entrar como um módulo de saúde e performance dentro da plataforma Aeria: cadastro de alunos, histórico de avaliações, relatórios por treino, gestão de planos e funil de aquisição para academias parceiras. Isso permite vender a solução como parte de um ecossistema maior.</p>
+      </div>
+    </section>
+
+    <section class="wrap two-col">
+      <div class="card">
+        <h2 class="section-title">Sugestões de nome</h2>
+        <ul class="list">
+          <li>ThermaScan Performance</li>
+          <li>ThermaFit</li>
+          <li>HeatTrace</li>
+          <li>PulseMap</li>
+          <li>CoreHeat</li>
+          <li>ThermoTrack Pro</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="section-title">Posicionamento de mercado</h2>
+        <p class="tagline"><strong>Um sistema visual de monitoramento de performance e recuperação para academias que querem mostrar resultado com mais precisão.</strong></p>
+        <ul class="list">
+          <li>performance</li>
+          <li>recuperação</li>
+          <li>tecnologia aplicada à academia</li>
+          <li>experiência premium para o aluno</li>
+          <li>acompanhamento visual de sobrecarga</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq" class="wrap faq">
+      <h2 class="section-title">FAQ</h2>
+      <details>
+        <summary>Isso é diagnóstico médico?</summary>
+        <p>Não. O produto deve ser apresentado como monitoramento de performance e recuperação.</p>
+      </details>
+      <details>
+        <summary>Precisa de câmera termográfica específica?</summary>
+        <p>Sim. O produto deve começar suportando um conjunto bem definido de câmeras para garantir consistência.</p>
+      </details>
+      <details>
+        <summary>Isso funciona sozinho?</summary>
+        <p>Não idealmente. O maior valor vem da combinação entre captura guiada, protocolo consistente e relatório visual.</p>
+      </details>
+      <details>
+        <summary>Serve para qualquer academia?</summary>
+        <p>O melhor começo é com academias premium, estúdios e parceiros mais abertos à inovação.</p>
+      </details>
+    </section>
+
+    <section id="contato" class="wrap" style="padding-bottom: 60px;">
+      <div class="highlight">
+        <h2 class="section-title" style="margin-top:0">Quer testar na sua academia?</h2>
+        <p class="section-sub">Se você quer uma demonstração, um piloto com escambo ou uma integração com a Aeria, o próximo passo é validar com um parceiro inicial e gerar o primeiro case.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="mailto:contato@aeria-apps.com.br">Quero uma demonstração</a>
+          <a class="btn secondary" href="mailto:contato@aeria-apps.com.br?subject=Piloto%20com%20escambo">Quero piloto com escambo</a>
+          <a class="btn secondary" href="https://aeria-apps.com.br" target="_blank" rel="noreferrer">Quero integrar com a Aeria</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div><strong style="color:var(--text)">ThermaScan Performance</strong><div>Landing page pronta para upload.</div></div>
+      <div>Feito para o ecossistema <strong style="color:var(--text)">Aeria</strong>.</div>
+    </div>
+  </footer>
+</body>
+</html>
