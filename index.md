@@ -19,6 +19,8 @@ Banco central de ideias do usuário.
 
 ## Ideias registradas
 - [Aplicativo de análise térmica muscular pré/pós-treino](ideas/app-termo-muscular-pre-pos-treino.md)
+- [PediPronto — SaaS de notificação de pedidos via WhatsApp](ideas/prd-saas-pedidos-whatsapp.md)
+- [Curso Offline para Viagens de Avião](ideas/curso-offline-aviao.md)
 
 ## Materiais relacionados
 - [Integração Dropbox + Obsidian + Composio + Telegram + aeria-apps.com.br](integracao-dropbox-obsidian-composio-telegram.md)
