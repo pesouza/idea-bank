@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aeria Robots — Identidade Visual</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#0a0e17;color:#e2e8f0;padding:0}
+  .container{max-width:1100px;margin:0 auto;padding:40px 24px}
+  
+  h1{font-size:36px;font-weight:800;margin-bottom:6px}
+  h2{font-size:24px;font-weight:700;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid rgba(255,255,255,0.08)}
+  h3{font-size:16px;font-weight:600;margin-bottom:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px}
+  .sub{color:#64748b;font-size:14px;margin-bottom:40px}
+  
+  /* === LOGO SECTION === */
+  .logo-section{background:linear-gradient(135deg,#0f172a,#1a2332);border-radius:24px;padding:48px;margin-bottom:40px;border:1px solid rgba(255,255,255,0.06);text-align:center}
+  .logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:32px}
+  .logo-card{background:rgba(255,255,255,0.03);border-radius:16px;padding:32px;border:1px solid rgba(255,255,255,0.06)}
+  .logo-card .label{font-size:11px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px}
+  
+  /* SVG LOGO - THE MAIN ONE */
+  .logo-main{background:#ffffff;border-radius:12px;padding:40px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;min-height:160px}
+  .logo-dark{background:#0f172a;border-radius:12px;padding:40px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;min-height:160px}
+  
+  /* === PALETTE === */
+  .palette-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:40px}
+  .swatch{border-radius:12px;padding:20px 16px;min-height:90px;display:flex;flex-direction:column;justify-content:flex-end}
+  .swatch-name{font-size:13px;font-weight:600}
+  .swatch-hex{font-family:'JetBrains Mono',monospace;font-size:11px;opacity:0.7}
+  
+  .swatch-primary{background:#0ea5e9;color:#fff}
+  .swatch-secondary{background:#2563eb;color:#fff}
+  .swatch-accent{background:#10b981;color:#fff}
+  .swatch-dark{background:#0f172a;color:#e2e8f0;border:1px solid rgba(255,255,255,0.1)}
+  .swatch-gray{background:#334155;color:#e2e8f0}
+  .swatch-warm{background:#f59e0b;color:#0f172a}
+  .swatch-surface{background:#1e293b;color:#e2e8f0;border:1px solid rgba(255,255,255,0.1)}
+  .swatch-light{background:#f8fafc;color:#0f172a;border:1px solid #e2e8f0}
+  
+  /* === TYPOGRAPHY === */
+  .typo-section{margin-bottom:40px}
+  .typo-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;margin-bottom:12px}
+  .typo-label{font-size:11px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+  .typo-inter{font-family:'Inter',sans-serif;font-size:28px;font-weight:800;color:#e2e8f0}
+  .typo-mono{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:400;color:#e2e8f0}
+  
+  /* === ELEMENTS === */
+  .element-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
+  .element-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;text-align:center}
+  .element-icon{font-size:40px;margin-bottom:12px}
+  .element-name{font-size:13px;font-weight:600}
+  .element-desc{font-size:11px;color:#64748b;margin-top:4px}
+  
+  /* === USAGE === */
+  .usage-section{background:linear-gradient(135deg,#0f172a,#1a2332);border-radius:24px;padding:40px;margin-bottom:40px;border:1px solid rgba(255,255,255,0.06)}
+  .usage-item{display:flex;align-items:center;gap:20px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.03);margin-bottom:8px}
+  .usage-num{font-size:20px;font-weight:800;color:#0ea5e9;min-width:30px}
+  .usage-text{font-size:14px;color:#cbd5e1;line-height:1.5}
+  
+  .badge{display:inline-block;background:rgba(14,165,233,0.12);color:#38bdf8;padding:2px 10px;border-radius:100px;font-size:11px;font-weight:600;margin-right:6px}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>🤖 Aeria Robots</h1>
+  <div class="sub">Identidade Visual · Brand Guidelines v1.0</div>
+
+  <!-- LOGO VARIANTS -->
+  <div class="logo-section">
+    <h2>Logotipo</h2>
+    
+    <div class="logo-grid">
+      <div class="logo-card">
+        <div class="label">Versão Claro (fundo branco)</div>
+        <div class="logo-main">
+          <svg width="260" height="80" viewBox="0 0 260 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Robot icon -->
+            <rect x="10" y="22" width="48" height="36" rx="6" fill="#0ea5e9"/>
+            <rect x="16" y="38" width="12" height="6" rx="2" fill="#ffffff" opacity="0.9"/>
+            <rect x="32" y="38" width="12" height="6" rx="2" fill="#ffffff" opacity="0.9"/>
+            <rect x="16" y="48" width="6" height="4" rx="1" fill="#ffffff" opacity="0.6"/>
+            <rect x="24" y="48" width="6" height="4" rx="1" fill="#ffffff" opacity="0.6"/>
+            <rect x="32" y="48" width="6" height="4" rx="1" fill="#ffffff" opacity="0.6"/>
+            <!-- Antenna -->
+            <rect x="30" y="12" width="8" height="10" rx="2" fill="#2563eb"/>
+            <circle cx="34" cy="10" r="4" fill="#0ea5e9"/>
+            <circle cx="34" cy="10" r="2" fill="#ffffff" opacity="0.8"/>
+            <!-- Arms -->
+            <rect x="56" y="28" width="22" height="6" rx="3" fill="#2563eb"/>
+            <rect x="76" y="26" width="8" height="10" rx="2" fill="#2563eb"/>
+            <rect x="4" y="28" width="8" height="6" rx="3" fill="#2563eb"/>
+            <rect x="0" y="26" width="8" height="10" rx="2" fill="#2563eb"/>
+            <!-- Wheels -->
+            <circle cx="20" cy="60" r="5" fill="#334155"/>
+            <circle cx="48" cy="60" r="5" fill="#334155"/>
+            <!-- Text -->
+            <text x="98" y="38" font-family="Inter, sans-serif" font-size="26" font-weight="800" fill="#0f172a">Aeria</text>
+            <text x="98" y="60" font-family="Inter, sans-serif" font-size="26" font-weight="400" fill="#0ea5e9">Robots</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="label">Versão Escuro (fundo dark)</div>
+        <div class="logo-dark">
+          <svg width="260" height="80" viewBox="0 0 260 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="22" width="48" height="36" rx="6" fill="#0ea5e9"/>
+            <rect x="16" y="38" width="12" height="6" rx="2" fill="#0f172a" opacity="0.9"/>
+            <rect x="32" y="38" width="12" height="6" rx="2" fill="#0f172a" opacity="0.9"/>
+            <rect x="16" y="48" width="6" height="4" rx="1" fill="#0f172a" opacity="0.6"/>
+            <rect x="24" y="48" width="6" height="4" rx="1" fill="#0f172a" opacity="0.6"/>
+            <rect x="32" y="48" width="6" height="4" rx="1" fill="#0f172a" opacity="0.6"/>
+            <rect x="30" y="12" width="8" height="10" rx="2" fill="#38bdf8"/>
+            <circle cx="34" cy="10" r="4" fill="#0ea5e9"/>
+            <circle cx="34" cy="10" r="2" fill="#ffffff" opacity="0.8"/>
+            <rect x="56" y="28" width="22" height="6" rx="3" fill="#38bdf8"/>
+            <rect x="76" y="26" width="8" height="10" rx="2" fill="#38bdf8"/>
+            <rect x="4" y="28" width="8" height="6" rx="3" fill="#38bdf8"/>
+            <rect x="0" y="26" width="8" height="10" rx="2" fill="#38bdf8"/>
+            <circle cx="20" cy="60" r="5" fill="#475569"/>
+            <circle cx="48" cy="60" r="5" fill="#475569"/>
+            <text x="98" y="38" font-family="Inter, sans-serif" font-size="26" font-weight="800" fill="#ffffff">Aeria</text>
+            <text x="98" y="60" font-family="Inter, sans-serif" font-size="26" font-weight="400" fill="#38bdf8">Robots</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOR PALETTE -->
+  <h2>Paleta de Cores</h2>
+  <div class="palette-grid">
+    <div class="swatch swatch-primary">
+      <div class="swatch-name">Primary</div>
+      <div class="swatch-hex">#0EA5E9</div>
+      <div class="swatch-hex">Sky Blue</div>
+    </div>
+    <div class="swatch swatch-secondary">
+      <div class="swatch-name">Secondary</div>
+      <div class="swatch-hex">#2563EB</div>
+      <div class="swatch-hex">Blue 600</div>
+    </div>
+    <div class="swatch swatch-accent">
+      <div class="swatch-name">Accent</div>
+      <div class="swatch-hex">#10B981</div>
+      <div class="swatch-hex">Emerald</div>
+    </div>
+    <div class="swatch swatch-warm">
+      <div class="swatch-name">Alert/Warm</div>
+      <div class="swatch-hex">#F59E0B</div>
+      <div class="swatch-hex">Amber</div>
+    </div>
+    <div class="swatch swatch-dark">
+      <div class="swatch-name">Dark BG</div>
+      <div class="swatch-hex">#0F172A</div>
+      <div class="swatch-hex">Slate 900</div>
+    </div>
+    <div class="swatch swatch-surface">
+      <div class="swatch-name">Surface</div>
+      <div class="swatch-hex">#1E293B</div>
+      <div class="swatch-hex">Slate 800</div>
+    </div>
+    <div class="swatch swatch-gray">
+      <div class="swatch-name">Text/Muted</div>
+      <div class="swatch-hex">#334155</div>
+      <div class="swatch-hex">Slate 700</div>
+    </div>
+    <div class="swatch swatch-light">
+      <div class="swatch-name">Light BG</div>
+      <div class="swatch-hex">#F8FAFC</div>
+      <div class="swatch-hex">Slate 50</div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <h2>Tipografia</h2>
+  <div class="typo-section">
+    <div class="typo-card">
+      <div class="typo-label">Títulos · Inter Bold / ExtraBold</div>
+      <div class="typo-inter">Aeria Robots — Construa o Futuro</div>
+    </div>
+    <div class="typo-card">
+      <div class="typo-label">Corpo · Inter Regular / Medium</div>
+      <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:400;color:#94a3b8">
+        De Arduino a Jetson Nano: tutoriais, cursos e projetos práticos de robótica.
+      </div>
+    </div>
+    <div class="typo-card">
+      <div class="typo-label">Código/Tech · JetBrains Mono</div>
+      <div class="typo-mono">const robot = new Robot({ platform: "ESP32" });</div>
+    </div>
+  </div>
+
+  <!-- VISUAL ELEMENTS -->
+  <h2>Elementos Visuais</h2>
+  <div class="element-grid">
+    <div class="element-card">
+      <div class="element-icon">🧊</div>
+      <div class="element-name">Geometria Hexagonal</div>
+      <div class="element-desc">Formas hexagonais como background e divisores — remetem a circuitos e tecnologia</div>
+    </div>
+    <div class="element-card">
+      <div class="element-icon">⎔</div>
+      <div class="element-name">Grid Tech</div>
+      <div class="element-desc">Grid de pontos/linhas como elemento de fundo — sensação de blueprint técnico</div>
+    </div>
+    <div class="element-card">
+      <div class="element-icon">📐</div>
+      <div class="element-name">Linhas de Circuito</div>
+      <div class="element-desc">Traços e cantos vivos em 45° — estética de placa de circuito</div>
+    </div>
+    <div class="element-card">
+      <div class="element-icon">🎯</div>
+      <div class="element-name">Graduações</div>
+      <div class="element-desc">Marca de escala/micrômetro — precisão e engenharia</div>
+    </div>
+  </div>
+
+  <!-- USAGE GUIDELINES -->
+  <div class="usage-section">
+    <h2 style="border-bottom-color:rgba(255,255,255,0.08)">Diretrizes de Uso</h2>
+    <div class="usage-item">
+      <div class="usage-num">01</div>
+      <div class="usage-text"><span class="badge">Logotipo</span> Usar sempre o ícone de robô + logotipo. O ícone NÃO deve ser usado sozinho em contextos institucionais.</div>
+    </div>
+    <div class="usage-item">
+      <div class="usage-num">02</div>
+      <div class="usage-text"><span class="badge">Cores</span> Primary (#0EA5E9) é a cor principal. Secondary (#2563EB) para hover/links. Accent (#10B981) para badges e destaques positivos.</div>
+    </div>
+    <div class="usage-item">
+      <div class="usage-num">03</div>
+      <div class="usage-text"><span class="badge">Fundo</span> O fundo padrão é Dark (#0F172A). Versão light (#F8FAFC) é aceitável para materiais impressos.</div>
+    </div>
+    <div class="usage-item">
+      <div class="usage-num">04</div>
+      <div class="usage-text"><span class="badge">Tom</span> Tom técnico mas acessível. "Robótica para todos" — nem acadêmico demais, nem infantil.</div>
+    </div>
+    <div class="usage-item">
+      <div class="usage-num">05</div>
+      <div class="usage-text"><span class="badge">Domínio</span> aeria-robots.com.br · E-mail: contato@aeria-robots.com.br</div>
+    </div>
+  </div>
+
+  <!-- LOGO DOWNLOAD -->
+  <div style="text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,0.06);margin-top:40px">
+    <p style="color:#64748b;font-size:13px">
+      Aeria Robots · Marca da <a href="https://aeria-apps.com.br" style="color:#0ea5e9;text-decoration:none">Aer.IA Creative Solutions</a> · 2026
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
