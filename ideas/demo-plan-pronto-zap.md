@@ -5,27 +5,26 @@ A demonstração será uma pequena peça de teatro interativa, ao vivo. Usaremos
 
 ---
 
-### Os Personagens (Perfis Hermes)
+### Os Personagens (Abordagem Interativa)
 
-1.  **Beca, a Atendente de Balcão**
-    *   **Perfil Hermes:** `hermes_beca_vendedora`
-    *   **Personalidade:** Rápida, eficiente, focada. Sua linguagem é direta e operacional ("Pedido #124 para o Alex, gerando QR Code.", "Atualizando status para 'Pronto'.").
-    *   **Objetivo na Demo:** Mostrar como o "Pronto Zap" torna seu trabalho mais fácil e organizado, eliminando a necessidade de gritar nomes e gerenciar uma multidão no balcão.
-    *   **Ferramentas (Skills):** Um skill `pronto-zap-vendor` com comandos como `criar_pedido(nome_cliente)`, `atualizar_status(id_pedido, novo_status)`.
+Esta nova abordagem é mais imersiva e coloca o cliente potencial no centro da demonstração.
 
-2.  **Alex, o Cliente (com Fome)**
-    *   **Perfil Hermes:** `hermes_alex_cliente`
-    *   **Personalidade:** Ansioso, moderno, não gosta de esperar em filas. Quer conveniência e informação.
-    *   **Objetivo na Demo:** Mostrar como a experiência do cliente é drasticamente melhorada. Ele pode esperar sentado, conversando, e saberá exatamente quando seu pedido estiver pronto.
-    *   **Ferramentas (Skills):** Um skill que simula um cliente de WhatsApp, com comandos como `ler_notificacoes()`.
+1.  **Beca, a Atendente de Balcão (Agente Hermes)**
+    *   **Perfil:** `hermes_beca_vendedora`
+    *   **Personalidade:** Dinâmica. A diretora da demo (Sophia) pode instruí-la a assumir diferentes personalidades ("seja rápida e eficiente", "seja mais simpática") para se adaptar ao cliente.
+    *   **Objetivo:** Demonstrar a eficiência e simplicidade do lado do vendedor.
 
----
+2.  **O Cliente Final (Interpretado pelo Cliente Potencial)**
+    *   **Ator:** O próprio cliente que está assistindo à demonstração.
+    *   **Ferramenta:** Seu próprio smartphone.
+    *   **Objetivo:** Viver em primeira mão a experiência de conveniência e comunicação clara que o "Pronto Zap" oferece, recebendo as notificações em tempo real no seu próprio WhatsApp.
 
 ### O Cenário (Setup da Demo)
 
-Apresentaremos em 3 telas (ou 3 áreas da mesma tela):
+1.  **Terminal da Beca (IA):** Mostra o agente "Beca" executando os comandos operacionais.
+2.  **Celular do Cliente (Real):** Onde a mágica acontece. O cliente escaneia o QR Code e recebe as notificações.
+3.  **Painel "Pronto Zap":** A interface web que a "Beca" está operando.
 
-1.  **Terminal da Beca:** Mostrando o agente "Beca" em ação, executando seus comandos.
 2.  **Tela do Alex:** Simulando a tela do celular do "Alex", mostrando as notificações do WhatsApp chegando.
 3.  **Painel "Pronto Zap":** A interface web real do produto, para o cliente ver o painel que a Beca estaria usando.
 
